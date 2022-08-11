@@ -1,5 +1,6 @@
 package com.example.mvvm_orders_managment.model
 
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 object OrderDataGenerator {
@@ -7,6 +8,8 @@ object OrderDataGenerator {
     private val currentUsers = arrayListOf<User>()
     private val currentProducts = arrayListOf<Product>()
     private val currentOrders = arrayListOf<Order>()
+
+    private const val defaultDelay = 2000L
 
     init {
         for (i in 1..100) {
@@ -44,6 +47,16 @@ object OrderDataGenerator {
         val orderID = 30000 + currentOrders.size
 
         currentOrders.add(Order(orderID, user, product))
+    }
+
+    suspend fun getAllOrders(): List<Order> {
+        delay(defaultDelay)
+        return currentOrders
+    }
+
+    suspend fun searchOrders(name: String): List<Order> {
+        delay(defaultDelay)
+        return currentOrders.filter { it.product.brand.startsWith(name, true) }
     }
 
 }
