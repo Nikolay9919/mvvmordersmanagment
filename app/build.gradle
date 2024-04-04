@@ -33,6 +33,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.mvvm_orders_managment'
 }
 
 dependencies {
